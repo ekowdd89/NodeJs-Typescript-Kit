@@ -1,15 +1,12 @@
-import express, { Request, Response } from 'express'
+import 'reflect-metadata';
+import express from 'express'
 import { AuthController } from '../controllers/authController'
-import { UserService } from '../../../app/userService'
-import { UserRepository } from '../../../domain/repositories/UserRepository'
+import { container } from 'tsyringe'
 
 const router = express.Router()
 
-const authController = AuthController.instanceAuthController(
-    UserService.instanceUserRepository(
-        UserRepository.getInstance()
-    )
-)
+const authController = container.resolve(AuthController)
+
 
 router.get('/users', authController.getUsers)
 

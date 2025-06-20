@@ -1,14 +1,14 @@
+import 'reflect-metadata';
+import { inject, injectable } from 'tsyringe';
 import { UserService } from '../../../app/userService';
 import { Request, Response } from 'express';
 
+
+@injectable()
 export class AuthController {
     constructor(
-        private userService : UserService
+       @inject(UserService) private userService: UserService
     ){}
-
-    static instanceAuthController(userService : UserService){
-        return new this(userService)
-    }
 
     getUsers = async (_req: Request, res: Response) => {
         const users = await this.userService.findAllUsers(

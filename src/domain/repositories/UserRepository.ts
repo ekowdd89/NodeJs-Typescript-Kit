@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+import { injectable } from "tsyringe";
 import User from "../../infra/database/models/userModel";
 
 export interface IUserRepository {
@@ -6,10 +8,9 @@ export interface IUserRepository {
     findAllUsers(page: number, limit: number): Promise<User[]>
 }
 
+
+@injectable()
 export class UserRepository implements IUserRepository {
-    static getInstance(): IUserRepository {
-        return new UserRepository()
-    }
     findUserByEmail(email: string): Promise<User | null> {
         return User.findOne({where: {email}})
     }

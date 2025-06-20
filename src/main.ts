@@ -2,9 +2,7 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv'
 import sequelize from './infra/database';
-import User from './infra/database/models/userModel';
 import { userRouter } from './interfaces/http/router';
-// import  from './interfaces/http/router';
 dotenv.config({ path: '../.env' });
 
 const app = express();
